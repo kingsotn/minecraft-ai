@@ -43,9 +43,7 @@ class ActionAgent:
                 if isinstance(chest, dict):
                     self.chest_memory[position] = chest
                 if chest == "Invalid":
-                    print(
-                        f"\033[32mAction Agent removing chest {position}: {chest}\033[0m"
-                    )
+                    print(f"\033[32mAction Agent removing chest {position}: {chest}\033[0m")
                     self.chest_memory.pop(position)
             else:
                 if chest != "Invalid":
@@ -90,18 +88,14 @@ class ActionAgent:
             ]
         programs = "\n\n".join(load_control_primitives_context(base_skills) + skills)
         response_format = load_prompt("action_response_format")
-        system_message_prompt = SystemMessagePromptTemplate.from_template(
-            system_template
-        )
+        system_message_prompt = SystemMessagePromptTemplate.from_template(system_template)
         system_message = system_message_prompt.format(
             programs=programs, response_format=response_format
         )
         assert isinstance(system_message, SystemMessage)
         return system_message
 
-    def render_human_message(
-        self, *, events, code="", task="", context="", critique=""
-    ):
+    def render_human_message(self, *, events, code="", task="", context="", critique=""):
         chat_messages = []
         error_messages = []
         # FIXME: damage_messages is not used
@@ -158,10 +152,10 @@ class ActionAgent:
             observation += f"Nearby blocks: None\n\n"
 
         if entities:
-            nearby_entities = [
-                k for k, v in sorted(entities.items(), key=lambda x: x[1])
-            ]
-            observation += f"Nearby entities (nearest to farthest): {', '.join(nearby_entities)}\n\n"
+            nearby_entities = [k for k, v in sorted(entities.items(), key=lambda x: x[1])]
+            observation += (
+                f"Nearby entities (nearest to farthest): {', '.join(nearby_entities)}\n\n"
+            )
         else:
             observation += f"Nearby entities (nearest to farthest): None\n\n"
 
@@ -169,7 +163,9 @@ class ActionAgent:
 
         observation += f"Hunger: {hunger:.1f}/20\n\n"
 
-        observation += f"Position: x={position['x']:.1f}, y={position['y']:.1f}, z={position['z']:.1f}\n\n"
+        observation += (
+            f"Position: x={position['x']:.1f}, y={position['y']:.1f}, z={position['z']:.1f}\n\n"
+        )
 
         observation += f"Equipment: {equipment}\n\n"
 
@@ -217,9 +213,7 @@ class ActionAgent:
                     if node.type != "FunctionDeclaration":
                         continue
                     node_type = (
-                        "AsyncFunctionDeclaration"
-                        if node["async"]
-                        else "FunctionDeclaration"
+                        "AsyncFunctionDeclaration" if node["async"] else "FunctionDeclaration"
                     )
                     functions.append(
                         {
@@ -239,8 +233,7 @@ class ActionAgent:
                     main_function is not None
                 ), "No async function found. Your main function must be async."
                 assert (
-                    len(main_function["params"]) == 1
-                    and main_function["params"][0].name == "bot"
+                    len(main_function["params"]) == 1 and main_function["params"][0].name == "bot"
                 ), f"Main function {main_function['name']} must take a single argument named 'bot'"
                 program_code = "\n\n".join(function["body"] for function in functions)
                 exec_code = f"await {main_function['name']}(bot);"
@@ -258,10 +251,9 @@ class ActionAgent:
     def summarize_chatlog(self, events):
         def filter_item(message: str):
             craft_pattern = r"I cannot make \w+ because I need: (.*)"
-            craft_pattern2 = (
-                r"I cannot make \w+ because there is no crafting table nearby"
-            )
+            craft_pattern2 = r"I cannot make \w+ because there is no crafting table nearby"
             mine_pattern = r"I need at least a (.*) to mine \w+!"
+
             if re.match(craft_pattern, message):
                 return re.match(craft_pattern, message).groups()[0]
             elif re.match(craft_pattern2, message):
@@ -277,4 +269,5 @@ class ActionAgent:
                 item = filter_item(event["onChat"])
                 if item:
                     chatlog.add(item)
+                    
         return "I also need " + ", ".join(chatlog) + "." if chatlog else ""

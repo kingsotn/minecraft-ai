@@ -1,6 +1,7 @@
 from voyager import Voyager
 
-mc_port = 56585
+# mc_port = 56585
+mc_port = 63556
 
 voyager = Voyager(
     mc_port=mc_port,
