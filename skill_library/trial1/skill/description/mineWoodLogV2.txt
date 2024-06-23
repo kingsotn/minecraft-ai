@@ -1,0 +1,3 @@
+async function mineWoodLog(bot) {
+    // The function is about mining a wood log block. It searches for various types of wood logs like oak, birch, spruce, etc. Once a wood log block is found within a certain distance, it mines that block. If no wood log is found, it notifies the player that it couldn't find one.
+}

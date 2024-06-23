@@ -1,0 +1,3 @@
+async function checkCoalInInventory(bot) {
+    // The function checks if there is at least one coal item in the bot's inventory and sends a corresponding message. If the bot has one or more coal items, it will chat "Task completed. Found 1 coal in inventory." Otherwise, it will chat "Task not completed. No coal found in inventory."
+}

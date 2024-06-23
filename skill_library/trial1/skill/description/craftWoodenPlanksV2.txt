@@ -1,0 +1,3 @@
+async function craftWoodenPlanks(bot) {
+    // The function crafts 1 oak plank using the `craftItem` function and then notifies the user that 4 wooden planks have been crafted.
+}

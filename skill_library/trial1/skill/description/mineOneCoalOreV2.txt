@@ -1,0 +1,3 @@
+async function mineOneCoalOre(bot) {
+    // The function is about mining a single coal ore block. It checks if the bot has a pickaxe in the inventory and crafts a wooden pickaxe if not available. Then, it equips the pickaxe and explores the environment to find a coal ore block using the `exploreUntil` function. If a coal ore block is found, it mines the block using the `mineBlock` function and notifies the successful mining of one coal ore.
+}

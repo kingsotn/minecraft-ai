@@ -1,0 +1,14 @@
+tqdm==4.65.0
+langchain==0.0.237
+javascript==1!1.0.2
+setuptools==68.0.0
+openai==0.27.8
+chardet==5.1.0
+cchardet==2.1.7
+chromadb==0.3.29
+tiktoken==0.4.0
+requests==2.31.0
+setuptools==68.0.0
+gymnasium==0.29.0
+psutil==5.9.5
+minecraft_launcher_lib==6.1

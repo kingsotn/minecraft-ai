@@ -1,0 +1,3 @@
+async function equipNetheriteSword(bot) {
+    // The function equips a netherite sword by first searching for it in the bot's inventory, then equipping it in the hand slot if found; otherwise, it notifies that the netherite sword is not present in the inventory.
+}
